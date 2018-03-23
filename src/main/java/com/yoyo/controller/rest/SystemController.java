@@ -1,4 +1,4 @@
-package com.yoyo.rest;
+package com.yoyo.controller.rest;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.yoyo.common.LoginInfo;
@@ -35,23 +35,23 @@ public class SystemController {
      * 登录校验
      * @param request
      * @param response
-     * @param loginInfo
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public String login(HttpServletRequest request,
-                        HttpServletResponse response,
-                        @RequestParam("loginInfo") LoginInfo loginInfo){
-        if("admin".equals(loginInfo.getAccount())){
-            if("admin@123".equals(loginInfo.getPassword())){
+    public String login(HttpServletRequest request, HttpServletResponse response){
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        String validCode = request.getParameter("validCode");
+        if("admin".equals(account)){
+            if("admin@123".equals(password)){
                 HttpSession session = request.getSession();
                 String sessionId = session.getId();
 
                 if(redisService.getSessionInfo(sessionId) == null){
                     SysUser sysUser = new SysUser();
-                    sysUser.setName(loginInfo.getAccount());
-                    sysUser.setPassword(loginInfo.getPassword());
+                    sysUser.setName(account);
+                    sysUser.setPassword(password);
                     // 加入缓存
                     redisService.addSessionInfo(sessionId, sysUser);
                 }
