@@ -32,4 +32,13 @@ public class ViewController {
         return "index";
     }
 
+    /**
+     * 任务中心
+     * @return
+     */
+    @RequestMapping("/task/list")
+    public String taskList(){
+        return "taskList";
+    }
+
 }

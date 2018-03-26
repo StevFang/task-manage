@@ -1,5 +1,7 @@
 package com.yoyo.common;
 
+import com.yoyo.model.SysUser;
+
 /**
  * 返回结果信息
  *
@@ -12,6 +14,10 @@ public class RespInfo {
     private String msg;
 
     private String json;
+
+    public RespInfo(){
+
+    }
 
     public RespInfo(SysEnum sysEnum){
         this(sysEnum, null);
@@ -45,5 +51,14 @@ public class RespInfo {
 
     public void setJson(String json) {
         this.json = json;
+    }
+
+    /**
+     * @param sysEnum
+     */
+    public RespInfo setBySysEnum(SysEnum sysEnum){
+        this.setCode(sysEnum.getCode());
+        this.setMsg(sysEnum.getMsg());
+        return this;
     }
 }

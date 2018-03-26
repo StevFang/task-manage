@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="common">
+
+    <sql id="pageHeader">
+        select * from (
+    </sql>
+
+    <sql id="pageFooter">
+        ) Temp0 limit #{pageSize}*#{pageNumber-1},#{pageSize}
+    </sql>
+
+    <sql id="countHeader">
+        select count(1) from (
+    </sql>
+
+    <sql id="counterFooter">
+        ) Temp1
+    </sql>
+
+</mapper>

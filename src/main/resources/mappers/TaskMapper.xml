@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yoyo.dao.TaskMapper">
+
+    <sql id="queryTask">
+        SELECT
+            taskID,
+            taskNo,
+            taskTitle,
+            taskSketch,
+            taskContent,
+            taskStartTime,
+            taskEndTime,
+            taskLevel,
+            taskCreatorID,
+            taskCreateTime,
+            taskUpdaterID,
+            taskUpdateTime,
+            validFlag,
+            modifyCount
+        FROM
+            Task
+    </sql>
+
+    <!--查询所有任务数量-->
+    <select id="queryCount" parameterType="com.yoyo.form.TaskForm" resultType="com.yoyo.model.Task">
+        <include refid="common.countHeader"/>
+        <include refid="queryTask"/>
+        WHERE 1=1
+        <if test="">
+
+        </if>
+        <if test="">
+
+        </if>
+        <include refid="common.counterFooter"/>
+    </select>
+
+    <!--查询所有任务-->
+    <select id="findAll" parameterType="com.yoyo.form.TaskForm" resultType="com.yoyo.model.Task">
+        <include refid="common.pageHeader"/>
+        <include refid="queryTask"/>
+        WHERE 1=1
+        <if test="">
+
+        </if>
+        <if test="">
+
+        </if>
+        <include refid="common.pageFooter"/>
+    </select>
+
+    <!--查询单个任务-->
+    <select id="findSingle" parameterType="com.yoyo.form.TaskForm" resultType="com.yoyo.model.Task">
+        <include refid="queryTask"/>
+        WHERE taskID = #{taskID}
+    </select>
+
+    <!--保存任务-->
+    <insert id="saveTask" parameterType="com.yoyo.model.Task"
+            useGeneratedKeys="true" keyColumn="taskID" keyProperty="taksID">
+        INSERT INTO Task(
+            taskID,
+            taskNo,
+            taskTitle,
+            taskSketch,
+            taskContent,
+            taskStartTime,
+            taskEndTime,
+            taskLevel,
+            taskCreatorID,
+            taskCreateTime,
+            taskUpdaterID,
+            taskUpdateTime,
+            validFlag,
+            modifyCount
+        )VALUE(
+            #{taskID},
+            #{taskNo},
+            #{taskTitle},
+            #{taskSketch},
+            #{taskContent},
+            #{taskStartTime},
+            #{taskEndTime},
+            #{taskLevel},
+            #{taskCreatorID},
+            #{taskCreateTime},
+            #{taskUpdaterID},
+            #{taskUpdateTime},
+            '1',
+            0
+        )
+    </insert>
+
+</mapper>
